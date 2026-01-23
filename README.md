@@ -22,7 +22,6 @@
 | Column                 | Type       | Options                               |
 |------------------------|------------|---------------------------------------|
 | user                   | references | null: false, foreign_key: true        |
-| image                  | string     | null: false                           |
 | name                   | string     | null: false                           |
 | description            | text       | null: false                           |
 | category_id            | integer    | null: false                           |
@@ -31,7 +30,6 @@
 | region_of_origin_id    | integer    | null: false                           |
 | days_to_ship_id        | integer    | null: false                           |
 | price                  | integer    | null: false                           |
-| status                 | integer    | null: false                           |
   
 ### Association
 - belongs_to :user
@@ -42,7 +40,7 @@
   
 | Column           | Type       | Options                               |
 |------------------|------------|---------------------------------------|
-| user             | references | null: false, foreign_key: true        |
+| user             | references | null: false,                          |
 | good             | references | null: false, foreign_key: true        |
   
 ### Association
@@ -51,15 +49,15 @@
 - has_one :shipping_address 
   
   
-## shipping_addressテーブル
+## shipping_addressesテーブル
   
 | Column           | Type       | Options                               |
 |------------------|------------|---------------------------------------|
 | purchase         | references | null: false, foreign_key: true        |
 | user             | references | null: false, foreign_key: true        |
 | postal_code      | string     | null: false                           |
-| prefecture       | string     | null: false                           |
-| city_id          | integer    | null: false                           |
+| prefecture_id    | integer    | null: false                           |
+| city             | string     | null: false                           |
 | street_address   | string     | null: false                           |
 | building_name    | string     |                                       |
 | phone_number     | string     | null: false                           |
