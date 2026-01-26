@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 ## users テーブル
   
 | Column              | Type    | Options                   |
