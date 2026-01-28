@@ -1,6 +1,7 @@
 class GoodsController < ApplicationController
 
-
+  def index
+  end
 
   private 
 
