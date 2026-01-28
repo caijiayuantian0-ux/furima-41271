@@ -9,11 +9,6 @@ before_action :authenticate_user!, only: [:new, :create]
   end
 
   def create
-  # パラメータの内容を確認
-  puts "====== 全パラメータ ======"
-  puts params.inspect
-  puts "========================="
-  
   @good = Good.new(goods_params)
   
   if @good.save
