@@ -1,3 +1,4 @@
+
 <div class="items-sell-contents">
   <header class="items-sell-header">
     <%= link_to image_tag('furima-logo-color.png' , size: '185x50'), "/" %>
@@ -5,12 +6,8 @@
   </header>
   <div class="items-sell-main">
     <h2 class="items-sell-title">商品の情報を入力</h2>
-    <%= form_with local: true do |f| %>
-
-    <%# インスタンスを渡して、エラー発生時にメッセージが表示されるようにしましょう。%>
-    <%# render 'shared/error_messages', model: f.object %>
-    <%# //インスタンスを渡して、エラー発生時にメッセージが表示されるようにしましょう。%>
-
+    <%= form_with model: @good, url: goods_path, local: true do |f| %>
+    <%= render 'shared/error_messages', model: @good %>
     <%# 商品画像 %>
     <div class="img-upload">
       <div class="weight-bold-text">
@@ -20,8 +17,8 @@
       <div class="click-upload">
         <p>
           クリックしてファイルをアップロード
-        </p>
-        <%= f.file_field :hoge, id:"item-image" %>
+        </p> 
+        <%= f.file_field :image, id:"item-image" %>
       </div>
     </div>
     <%# /商品画像 %>
