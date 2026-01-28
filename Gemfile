@@ -48,6 +48,7 @@ group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ]
   gem 'rspec-rails', '~> 4.0.0'
+  gem 'factory_bot_rails'
 end
 
 group :development do
@@ -79,9 +80,3 @@ end
 gem 'active_hash'
 
 gem 'devise'
-
-group :development, :test do
-  gem 'factory_bot_rails'
-  gem 'shoulda-matchers', require: false
-  gem 'faker'
-end
