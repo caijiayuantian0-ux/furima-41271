@@ -33,4 +33,6 @@ class User < ApplicationRecord
 
   validates :date_of_birth, presence: true
 
+  # Associations
+  has_many :goods, dependent: :destroy
 end
