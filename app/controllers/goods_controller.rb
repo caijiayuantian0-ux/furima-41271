@@ -10,7 +10,7 @@ class GoodsController < ApplicationController
   end
 
   def create
-    @good = Good.new(goods_params)
+    @good = Good.new(good_params)
 
     if @good.save
       redirect_to root_path
@@ -27,13 +27,20 @@ class GoodsController < ApplicationController
     @good = Good.find(params[:id])
   end
 
+  def update
+    good = Good.find(params[:id])
+    good.update(good_params)
+    redirect_to root_path
+  end
+
+
   private
   
   def set_good
     @good = Good.find(params[:id])
   end
 
-  def goods_params
+  def good_params
     params.require(:good).permit(
       :name,
       :description,
