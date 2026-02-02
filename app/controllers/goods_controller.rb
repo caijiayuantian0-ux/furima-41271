@@ -30,9 +30,9 @@ class GoodsController < ApplicationController
   end
 
   def update
-    good = Good.find(params[:id])
-    good.update(good_params)
-    redirect_to root_path
+    @good = Good.find(params[:id])
+    @good.update(good_params)
+    redirect_to good_path(@good)
   end
 
 
