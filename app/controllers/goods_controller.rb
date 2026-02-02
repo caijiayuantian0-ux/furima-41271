@@ -1,5 +1,7 @@
 class GoodsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create]
+  before_action :authenticate_user!, only: [:new, :create, :edit,]
+  before_action :set_good, only: [ :edit ]
+  before_action :move_to_index, only: [ :edit ]
 
   def index
     @goods = Good.includes(:user).order(created_at: :desc)
@@ -38,6 +40,10 @@ class GoodsController < ApplicationController
   
   def set_good
     @good = Good.find(params[:id])
+  end
+
+  def move_to_index
+    redirect_to root_path unless current_user.id == @good.user_id
   end
 
   def good_params
