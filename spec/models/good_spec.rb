@@ -103,6 +103,12 @@ RSpec.describe Good, type: :model do
         @good.valid?
         expect(@good.errors.full_messages.join).to match(/Price.*(less than or equal to 9999999)/)
       end
+
+      it 'userが紐付いていないと出品できない' do
+        @good.user = nil
+        @good.valid?
+        expect(@good.errors[:user]).to be_present
+      end
     end
   end
 end
