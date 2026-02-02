@@ -3,14 +3,12 @@ class Good < ApplicationRecord
   # Validations
   VALID_PRICE_REGEX = /\A[0-9]+\z/
 
-
   validates :image, presence: true
   validates :name, presence: true, length: { maximum: 40 }
   validates :description, presence: true, length: { maximum: 1000 }
   validates :price, presence: true
 
-
-  with_options numericality: { other_than: 1, message: "を選択してください" } do
+  with_options numericality: { other_than: 1, message: 'を選択してください' } do
     validates :category_id
     validates :condition_id
     validates :shipping_fee_id
@@ -19,7 +17,7 @@ class Good < ApplicationRecord
   end
 
   validates :price,
-            format: { 
+            format: {
               with: VALID_PRICE_REGEX
             },
             numericality: {
@@ -30,7 +28,7 @@ class Good < ApplicationRecord
 
   # Associations
   belongs_to :user
-  has_one :purchase
+  ## has_one :purchase
   has_one_attached :image
   belongs_to :category
   belongs_to :condition

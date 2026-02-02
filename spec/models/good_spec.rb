@@ -16,7 +16,7 @@ RSpec.describe Good, type: :model do
       it '画像が空だと保存できない' do
         @good.image = nil
         @good.valid?
-        expect(@good.errors.full_messages).to include("Image can't be blank").or include("Image を選択してください")
+        expect(@good.errors.full_messages).to include("Image can't be blank").or include('Image を選択してください')
       end
 
       it '商品名が空だと保存できない' do
@@ -28,7 +28,7 @@ RSpec.describe Good, type: :model do
       it '商品名が41文字以上だと保存できない' do
         @good.name = 'a' * 41
         @good.valid?
-        expect(@good.errors.full_messages).to include("Name is too long (maximum is 40 characters)")
+        expect(@good.errors.full_messages).to include('Name is too long (maximum is 40 characters)')
       end
 
       it '商品説明が空だと保存できない' do
@@ -40,7 +40,7 @@ RSpec.describe Good, type: :model do
       it '商品説明が1001文字以上だと保存できない' do
         @good.description = 'a' * 1001
         @good.valid?
-        expect(@good.errors.full_messages).to include("Description is too long (maximum is 1000 characters)")
+        expect(@good.errors.full_messages).to include('Description is too long (maximum is 1000 characters)')
       end
 
       it 'カテゴリーが---(1)だと保存できない' do
