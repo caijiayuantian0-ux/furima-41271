@@ -31,10 +31,15 @@ class GoodsController < ApplicationController
 
   def update
     @good = Good.find(params[:id])
-    @good.update(good_params)
-    redirect_to good_path(@good)
+    if @good.update(good_params)
+      redirect_to good_path(@good)
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
 
+  def destroy
+  end
 
   private
   
