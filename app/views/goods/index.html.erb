@@ -128,12 +128,6 @@
     </div>
     <ul class='item-lists'>
 
-      <% if @goods.empty? %>
-        <li class="list">
-          <%= image_tag "item-sample.png", class: "item-img" %>
-        </li>
-      <% end %>
-
       <% @goods.each do |good| %>
         <li class="list">
           <%= link_to "#" do %>
@@ -172,6 +166,7 @@
               <div class="item-price">
                 <span>9999999円<br>(税込み)</span>
                 <div class="star-btn">
+                  <%= image_tag "star.png", class: "star-icon" %>
                   <span class="star-count">0</span>
                 </div>
               </div>
