@@ -80,3 +80,5 @@ end
 gem 'active_hash'
 
 gem 'devise'
+
+gem 'active_hash'
