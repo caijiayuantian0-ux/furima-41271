@@ -3,7 +3,6 @@ class GoodsController < ApplicationController
 
   def index
     @goods = Good.includes(:user).order(created_at: :desc)
-    @goods = Good.order(created_at: :desc)
   end
 
   def new
