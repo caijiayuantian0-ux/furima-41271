@@ -25,6 +25,7 @@ class GoodsController < ApplicationController
     @good = Good.find(params[:id])
   end
 
+
   def edit
     @good = Good.find(params[:id])
   end
@@ -40,7 +41,7 @@ class GoodsController < ApplicationController
 
   def destroy
   end
-
+  
   private
   
   def set_good
