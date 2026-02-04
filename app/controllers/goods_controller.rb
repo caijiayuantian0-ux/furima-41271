@@ -1,7 +1,7 @@
 class GoodsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit,]
-  before_action :set_good, only: [ :edit ]
-  before_action :move_to_index, only: [ :edit ]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
+  before_action :set_good, only: [ :edit, :show, :update]
+  before_action :move_to_index, only: [ :edit, :update]
 
   def index
     @goods = Good.includes(:user).order(created_at: :desc)
@@ -22,9 +22,7 @@ class GoodsController < ApplicationController
   end
 
   def show
-    @good = Good.find(params[:id])
   end
-
 
   def edit
   end
@@ -37,8 +35,6 @@ class GoodsController < ApplicationController
     end
   end
 
-  def destroy
-  end
   
   private
   
