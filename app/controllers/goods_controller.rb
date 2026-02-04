@@ -1,5 +1,7 @@
 class GoodsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
+  before_action :set_good, only: [ :edit, :show, :update]
+  before_action :move_to_index, only: [ :edit, :update]
 
   def index
     @goods = Good.includes(:user).order(created_at: :desc)
@@ -10,7 +12,7 @@ class GoodsController < ApplicationController
   end
 
   def create
-    @good = Good.new(goods_params)
+    @good = Good.new(good_params)
 
     if @good.save
       redirect_to root_path
@@ -20,12 +22,31 @@ class GoodsController < ApplicationController
   end
 
   def show
+  end
+
+  def edit
+  end
+
+  def update
+    if @good.update(good_params)
+      redirect_to good_path(@good)
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  
+  private
+  
+  def set_good
     @good = Good.find(params[:id])
   end
 
-  private
+  def move_to_index
+    redirect_to root_path unless current_user.id == @good.user_id
+  end
 
-  def goods_params
+  def good_params
     params.require(:good).permit(
       :name,
       :description,
