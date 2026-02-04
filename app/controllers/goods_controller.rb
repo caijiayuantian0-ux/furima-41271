@@ -19,6 +19,10 @@ class GoodsController < ApplicationController
     end
   end
 
+  def show
+    @good = Good.find(params[:id])
+  end
+
   private
 
   def goods_params
