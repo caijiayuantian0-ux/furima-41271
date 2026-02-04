@@ -27,11 +27,9 @@ class GoodsController < ApplicationController
 
 
   def edit
-    @good = Good.find(params[:id])
   end
 
   def update
-    @good = Good.find(params[:id])
     if @good.update(good_params)
       redirect_to good_path(@good)
     else
