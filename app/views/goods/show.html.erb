@@ -33,7 +33,7 @@
 
 
       <% else %>
-        <%= link_to "購入画面に進む", "#", data: { turbo: false }, class:"item-red-btn" %>
+        <%= link_to "購入画面に進む", good_purchases_path(@good), data: { turbo: false }, class:"item-red-btn" %>
       <% end %>
     <% end %>
 
