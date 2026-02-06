@@ -1,14 +1,23 @@
-class Purchase
+class PurchaseForm
   include ActiveModel::Model
   
   attr_accessor :user_id, :good_id, 
                 :postal_code, :prefecture_id, :city, :street_address, :building_name, :phone_number
   
-    validates :postal_code,  presence: true, format: { with: /\A\d{3}-\d{4}\z/ }
+    VALID_POSTAL_REGEX =/\A\d{3}-\d{4}\z/
+    VALID_PHONE_REGEX =/\A\d{10,11}\z/
+
+    validates :postal_code,  presence: true,
+    format: {
+       with: VALID_POSTAL_REGEX 
+      }
     validates :prefecture_id, presence: true, numericality: { other_than: 1, }
     validates :city, :street_address ,  presence: true
-    validates :phone_number,  presence: true, format: { with: /\A\d{10,11}\z/, }
-    validates :user_id, :good_id,  presence: true,
+    validates :phone_number,  presence: true,
+    format: {
+       with: VALID_PHONE_REGEX
+       }
+    validates :user_id, :good_id,  presence: true
 
   def save
     return false unless valid?
