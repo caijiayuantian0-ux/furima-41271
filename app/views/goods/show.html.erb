@@ -8,11 +8,11 @@
     </h2>
     <div class="item-img-content">
       <%= image_tag @good.image, class: "item-box-img" if @good.image.attached? %>
-      <%# if @good.purchase.present? %>
+      <% if @good.purchase.present? %>
         <div class="sold-out">
           <span>Sold out!!</span>
         </div>
-      <%# end %>
+      <% end %>
     </div>
     <div class="item-price-box">
       <span class="item-price">
@@ -33,7 +33,7 @@
 
 
       <% else %>
-        <%= link_to "購入画面に進む", good_purchases_path(@good), data: { turbo: false }, class:"item-red-btn" %>
+          <%= link_to "購入画面に進む", good_purchases_path(@good), data: { turbo: false }, class:"item-red-btn" %>
       <% end %>
     <% end %>
 

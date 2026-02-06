@@ -2,6 +2,7 @@ class PurchasesController < ApplicationController
   before_action :set_good
   before_action :authenticate_user!
   before_action :move_to_root, only: [ :create]
+  before_action :redirect_if_sold
 
   def index
     @purchase = PurchaseForm.new
@@ -20,6 +21,12 @@ class PurchasesController < ApplicationController
 
   def set_good
     @good = Good.find(params[:good_id])
+  end
+
+  def redirect_if_sold
+    if @good.purchase.present?
+      redirect_to root_path
+    end
   end
 
   def purchase_params
