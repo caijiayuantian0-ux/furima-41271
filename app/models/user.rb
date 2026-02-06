@@ -35,4 +35,6 @@ class User < ApplicationRecord
 
   # Associations
   has_many :goods, dependent: :destroy
+  has_many :purchases, dependent: :destroy
+  
 end
