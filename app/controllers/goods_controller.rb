@@ -1,8 +1,7 @@
 class GoodsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
-  before_action :set_good, only: [ :edit, :show, :update]
-  before_action :move_to_index, only: [ :edit, :update]
-
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :set_good, only: [:show, :edit, :update, :destroy]
+  before_action :move_to_index, only: [:edit, :update, :destroy]
   def index
     @goods = Good.includes(:user).order(created_at: :desc)
   end
@@ -35,6 +34,10 @@ class GoodsController < ApplicationController
     end
   end
 
+  def destroy
+    @good.destroy
+    redirect_to root_path
+  end
   
   private
   
