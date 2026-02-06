@@ -1,7 +1,7 @@
 class PurchasesController < ApplicationController
   before_action :set_good
   before_action :authenticate_user!
-  before_action :move_to_root, only: [:index, :create]
+  before_action :move_to_root, only: [ :create]
 
   def index
     @purchase = PurchaseForm.new
