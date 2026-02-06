@@ -1,12 +1,12 @@
 class PurchasesController < ApplicationController
+  before_action :set_good
 
-  def index 
+  def index
     @purchase = Purchase.new
   end
 
   def create
-     @purchase = Purchase.new(purchase_params)
-
+    @purchase = Purchase.new(purchase_params)
     if @purchase.save
       redirect_to root_path
     else
@@ -21,12 +21,11 @@ class PurchasesController < ApplicationController
   end
 
   def purchase_params
-    params.require(:purchases).permit(
+    params.require(:purchase).permit(
       :postal_code, :prefecture_id, :city, :street_address, :building_name, :phone_number
     ).merge(
       user_id: current_user.id,
       good_id: @good.id
     )
   end
-
 end
