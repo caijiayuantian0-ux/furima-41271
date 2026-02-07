@@ -1,11 +1,13 @@
 class PurchaseForm
   include ActiveModel::Model
   
-  attr_accessor :user_id, :good_id, 
+  attr_accessor :user_id, :good_id, :token,
                 :postal_code, :prefecture_id, :city, :street_address, :building_name, :phone_number
   
     VALID_POSTAL_REGEX =/\A\d{3}-\d{4}\z/
     VALID_PHONE_REGEX =/\A\d{10,11}\z/
+
+    validates :token, presence: true
 
     validates :postal_code,  presence: true,
     format: {
@@ -39,5 +41,5 @@ class PurchaseForm
     false
   end
 
-  
+
 end

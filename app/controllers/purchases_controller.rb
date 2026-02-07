@@ -5,12 +5,15 @@ class PurchasesController < ApplicationController
   before_action :redirect_if_sold
 
   def index
+    gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
     @purchase = PurchaseForm.new
   end
 
   def create
     @purchase = PurchaseForm.new(purchase_params)
-    if @purchase.save
+    if @purchase.valid?
+      pay_item
+      @purchase.save
       redirect_to root_path
     else
       render :index, status: :unprocessable_entity
@@ -34,7 +37,8 @@ class PurchasesController < ApplicationController
       :postal_code, :prefecture_id, :city, :street_address, :building_name, :phone_number
     ).merge(
       user_id: current_user.id,
-      good_id: @good.id
+      good_id: @good.id,
+      token: params[:token]
     )
   end
 
@@ -42,5 +46,16 @@ class PurchasesController < ApplicationController
     if current_user.id == @good.user_id || @good.purchase.present?
       redirect_to root_path
     end
+  end
+
+  def pay_item
+    good = Good.find( purchase_params[:good_id])
+
+      Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+      Payjp::Charge.create(
+        amount: good.price,
+        card: purchase_params[:token],
+        currency: 'jpy'
+      )
   end
 end
