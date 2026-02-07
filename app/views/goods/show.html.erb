@@ -24,7 +24,8 @@
     </div>
 
 
-    <% if user_signed_in? %>
+    <% sold_out = @good.purchase.present? %>
+    <% if user_signed_in? && !sold_out %>
     
       <% if current_user.id == @good.user_id %>
         <%= link_to "商品の編集", edit_good_path(@good) , method: :get, class: "item-red-btn" %>

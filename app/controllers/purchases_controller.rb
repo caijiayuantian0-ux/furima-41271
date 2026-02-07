@@ -1,8 +1,8 @@
 class PurchasesController < ApplicationController
-  before_action :set_good
-  before_action :authenticate_user!
-  before_action :move_to_root, only: [ :create]
-  before_action :redirect_if_sold
+  before_action :set_good, only: [ :index, :create]
+  before_action :authenticate_user!, only: [ :index, :create]
+  before_action :move_to_root, only: [ :index, :create]
+  before_action :redirect_if_sold, only: [ :index, :create]
 
   def index
     gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
