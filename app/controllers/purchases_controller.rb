@@ -14,12 +14,12 @@ class PurchasesController < ApplicationController
     if @purchase.valid?
       pay_item
       @purchase.save
+
       redirect_to root_path
     else
       render :index, status: :unprocessable_entity
     end
   end
-
   private
 
   def set_good
