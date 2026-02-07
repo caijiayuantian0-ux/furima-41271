@@ -38,4 +38,6 @@ class PurchaseForm
   rescue ActiveRecord::RecordInvalid
     false
   end
+
+  
 end

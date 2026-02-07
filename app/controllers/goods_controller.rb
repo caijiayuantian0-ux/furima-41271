@@ -2,6 +2,7 @@ class GoodsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_good, only: [:show, :edit, :update, :destroy]
   before_action :move_to_index, only: [:edit, :update, :destroy]
+  before_action :redirect_if_sold, only: [:edit, :update]
   def index
     @goods = Good.includes(:user).order(created_at: :desc)
   end
@@ -61,5 +62,11 @@ class GoodsController < ApplicationController
       :price,
       :image
     ).merge(user_id: current_user.id)
+  end
+
+  def redirect_if_sold
+    if @good.purchase.present?
+      redirect_to root_path
+    end
   end
 end
