@@ -1,4 +1,5 @@
 class PurchasesController < ApplicationController
+<<<<<<< Updated upstream
   before_action :set_good, only: [ :index, :create]
   before_action :authenticate_user!, only: [ :index, :create]
   before_action :move_to_root, only: [ :index, :create]
@@ -14,11 +15,25 @@ class PurchasesController < ApplicationController
     if @purchase.valid?
       pay_item
       @purchase.save
+=======
+  before_action :authenticate_user!
+  before_action :set_good
+  
+  def index
+    @shipping_address_purchase = ShippingAddressPurchase.new
+  end
+  
+  def create
+    @shipping_address_purchase = ShippingAddressPurchase.new(shipping_address_purchase_params)
+    if @shipping_address_purchase.valid?
+      @shipping_address_purchase.save
+>>>>>>> Stashed changes
       redirect_to root_path
     else
       render :index, status: :unprocessable_entity
     end
   end
+<<<<<<< Updated upstream
 
   private
 
@@ -57,5 +72,16 @@ class PurchasesController < ApplicationController
         card: purchase_params[:token],
         currency: 'jpy'
       )
+=======
+  
+  private
+  
+  def set_good
+    @good = Good.find(params[:good_id])
+  end
+  
+  def shipping_address_purchase_params
+    params.require(:shipping_address_purchase).permit(:postal_code, :prefecture_id, :city, :street_address, :building_name, :phone_number, :token).merge(user_id: current_user.id, good_id: @good.id, token: params[:token])
+>>>>>>> Stashed changes
   end
 end
