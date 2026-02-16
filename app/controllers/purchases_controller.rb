@@ -14,12 +14,12 @@ class PurchasesController < ApplicationController
     if @purchase.valid?
       pay_item
       @purchase.save
+
       redirect_to root_path
     else
       render :index, status: :unprocessable_entity
     end
   end
-
   private
 
   def set_good
@@ -49,11 +49,10 @@ class PurchasesController < ApplicationController
   end
 
   def pay_item
-    good = Good.find( purchase_params[:good_id])
 
       Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
       Payjp::Charge.create(
-        amount: good.price,
+        amount: @good.price,
         card: purchase_params[:token],
         currency: 'jpy'
       )

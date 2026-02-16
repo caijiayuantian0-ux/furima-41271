@@ -1,4 +1,5 @@
 const pay = () => {
+
   const publicKey = gon.public_key
   const payjp = Payjp(publicKey)
   const elements = payjp.elements();
@@ -9,6 +10,7 @@ const pay = () => {
   numberElement.mount('#number-form');
   expiryElement.mount('#expiry-form');
   cvcElement.mount('#cvc-form');
+
   const form = document.getElementById('charge-form')
   form.addEventListener("submit", (e) => {
     payjp.createToken(numberElement).then(function (response) {
@@ -28,4 +30,5 @@ const pay = () => {
   });
 };
 
-window.addEventListener("load", pay);
+window.addEventListener("turbo:load", pay);
+window.addEventListener("turbo:render", pay);
